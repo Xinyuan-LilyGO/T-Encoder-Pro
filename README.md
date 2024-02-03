@@ -4,7 +4,7 @@
  * @Author: LILYGO_L
  * @Date: 2023-09-11 16:13:14
  * @LastEditors: LILYGO_L
- * @LastEditTime: 2024-02-03 09:14:53
+ * @LastEditTime: 2024-02-03 16:09:09
  * @License: GPL 3.0
 -->
 <h1 align = "center">T-Encoder-Pro</h1>
@@ -116,6 +116,7 @@
 
 | Setting                               | Value                                 |
 | :-------------------------------: | :-------------------------------: |
+| Board                                | Adafruit Feather ESP32-S3 No PSRAM|
 | Upload Speed                     | 921600                               |
 | USB Mode                           | Hardware CDC and JTAG     |
 | USB CDC On Boot                | Enabled                             |
@@ -155,7 +156,7 @@
 | SDIO3                     | IO14                  |
 | SCLK                  | IO12                  |
 | RST                    | IO4                  |
-| VCI EN                | IO3                  |
+| VCI EN               |  IO3                  |
 | CS                    | IO10                  |
 
 | Touch PIN          | ESP32S3 PIN      |

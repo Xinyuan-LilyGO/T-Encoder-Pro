@@ -4,7 +4,7 @@
  * @Author: LILYGO_L
  * @Date: 2023-09-11 16:13:14
  * @LastEditors: LILYGO_L
- * @LastEditTime: 2024-02-02 18:42:49
+ * @LastEditTime: 2024-02-03 16:08:00
  * @License: GPL 3.0
 -->
 
@@ -59,7 +59,7 @@ T-Encoder-Pro是一款基于ESP32S3R8芯片开发的一款由旋钮控制的，�
 
 ## 模块
 
-### 1. 主控
+### 1. MCU
 
 * 芯片：ESP32-S3-R8
 * PSRAM：8M (Octal SPI) 
@@ -117,6 +117,7 @@ T-Encoder-Pro是一款基于ESP32S3R8芯片开发的一款由旋钮控制的，�
 
 | Setting                               | Value                                 |
 | :-------------------------------: | :-------------------------------: |
+| Board                                | Adafruit Feather ESP32-S3 No PSRAM|
 | Upload Speed                     | 921600                               |
 | USB Mode                           | Hardware CDC and JTAG     |
 | USB CDC On Boot                | Enabled                             |
@@ -156,7 +157,7 @@ T-Encoder-Pro是一款基于ESP32S3R8芯片开发的一款由旋钮控制的，�
 | SDIO3                     | IO14                  |
 | SCLK                  | IO12                  |
 | RST                    | IO4                  |
-| VCI EN               |   IO3                  |
+| VCI EN                | IO3                  |
 | CS                    | IO10                  |
 
 | 触摸引脚          | ESP32S3引脚      |
