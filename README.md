@@ -67,7 +67,7 @@
 
 ### 2. Screen
 
-* Size: 2.04-inch round screen
+* Size: 1.2-inch round screen
 * Screen Type: AMOLED
 * Driver Chip: SH8601A-W14-T06
 * Compatibility Library: Arduino_GFX
