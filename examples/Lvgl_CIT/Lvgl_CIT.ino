@@ -1,9 +1,15 @@
 /*
+ * @Description(CN):
+ *      这是针对于T-Encoder-Pro编写的用户测试程序CIT
+ *
  * @Description(EN):
  *      This is a user testing program CIT written for T-Encoder-Pro.
+ *
+ * @version: V1.0.0
  * @Author: LILYGO_L
  * @Date: 2023-09-22 11:59:37
- * @LastEditTime: 2024-11-11 14:09:45
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2024-07-12 18:18:34
  * @License: GPL 3.0
  */
 #include "custom.h"

@@ -1,8 +1,10 @@
 /*
  * @Description: None
+ * @version: V1.0.0
  * @Author: LILYGO_L
  * @Date: 2023-10-05 11:31:11
- * @LastEditTime: 2024-11-11 14:08:57
+ * @LastEditors: LILYGO_L
+ * @LastEditTime: 2024-01-31 13:42:36
  * @License: GPL 3.0
  */
 #include <Arduino.h>

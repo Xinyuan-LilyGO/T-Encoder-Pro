@@ -1,8 +1,10 @@
 /*
  * @Description: None
+ * @version: V1.0.0
  * @Author: LILYGO_L
  * @Date: 2023-10-06 10:54:55
- * @LastEditTime: 2024-11-11 14:09:08
+ * @LastEditors: LILYGO_L
+ * @LastEditTime: 2024-01-10 14:57:29
  * @License: GPL 3.0
  */
 #pragma once
