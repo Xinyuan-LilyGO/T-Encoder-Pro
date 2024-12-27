@@ -35,3 +35,23 @@
 #define KNOB_DATA_A 1
 #define KNOB_DATA_B 2
 #define KNOB_KEY 0
+
+
+/****************************************
+********** factory ui demo pin **********
+****************************************/
+// touch key-press 
+#define TOUCH_KEY_PRESS_PIN 16  
+// Servo motors
+#define SERVO_MOTORS  15        
+
+// WS2812B_DATA
+// #define WS2812B_DATA 18
+#define WS2812B_DATA    43  // TX
+#define WS2812B_LED_NUM 12  // RX
+
+// encoder
+
+#define ENCODE_A_PIN KNOB_DATA_A
+#define ENCODE_B_PIN KNOB_DATA_B
+#define ENCODE_K_PIN KNOB_KEY
