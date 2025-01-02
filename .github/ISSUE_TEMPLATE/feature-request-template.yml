@@ -1,6 +1,8 @@
 name: Feature request template
 description: Suggest an idea for this project.
 labels: ["question"]
+assignees:
+  - Llgok
 body:
   - type: markdown
     attributes:
