@@ -7,7 +7,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        * Before reporting a new issue please check and search in [frequently asked questions list](./README.md) 
+        * Before reporting a new issue, please check and search the list of frequently asked questions in the `README.md` file.
         * If still experiencing the issue, please provide as many details as possible below about your hardware, computer setup and code.
   - type: input
     id: Operating_System
