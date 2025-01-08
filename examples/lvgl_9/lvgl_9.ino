@@ -1,3 +1,10 @@
+/*
+ * @Description: lvgl 9 example
+ * @Author: LILYGO_L
+ * @Date: 2025-01-08 09:08:52
+ * @LastEditTime: 2025-01-08 09:41:20
+ * @License: GPL 3.0
+ */
 #include <lvgl.h>
 #include "Arduino_GFX_Library.h"
 #include "pin_config.h"
