@@ -1,6 +1,6 @@
 name: Feature request template
 description: Suggest an idea for this project.
-labels: ["question"]
+labels: ["enhancement"]
 assignees:
   - Llgok
 body:
