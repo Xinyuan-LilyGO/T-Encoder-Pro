@@ -2,7 +2,7 @@
  * @Description: None
  * @Author: LILYGO_L
  * @Date: 2023-09-11 16:13:14
- * @LastEditTime: 2025-09-16 10:43:00
+ * @LastEditTime: 2025-09-16 10:45:52
  * @License: GPL 3.0
 -->
 <h1 align = "center">T-Encoder-Pro</h1>
@@ -10,10 +10,6 @@
 <p align="center" width="100%">
     <img src="image/13.jpg" alt="">
 </p>
-
-<p> 
-  <a href="https://www.arduino.cc/"> <img src="badges/Arduino_badge.png" height="25px" alt="Arduino_badge"></a>
-</p> 
 
 ## **English | [中文](./README_CN.md)**
 
