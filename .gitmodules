@@ -1,0 +1,9 @@
+[submodule "components/cpp_bus_driver"]
+	path = components/cpp_bus_driver
+	url = https://github.com/Llgok/cpp_bus_driver.git
+[submodule "components/arduino_cpp_bus_driver"]
+	path = components/arduino_cpp_bus_driver
+	url = https://github.com/Llgok/arduino_cpp_bus_driver.git
+[submodule "components/SensorLib"]
+	path = components/SensorLib
+	url = https://github.com/Llgok/SensorLib.git

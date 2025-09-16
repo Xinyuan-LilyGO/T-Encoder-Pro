@@ -2,7 +2,7 @@
  * @Description: None
  * @Author: LILYGO_L
  * @Date: 2023-09-11 16:13:14
- * @LastEditTime: 2024-11-18 11:40:23
+ * @LastEditTime: 2025-09-16 10:40:49
  * @License: GPL 3.0
 -->
 
@@ -95,59 +95,39 @@ T-Encoder-Pro是一款基于ESP32S3R8芯片的智能控制旋钮，配备AMOLED�
 
 ### 例程支持
 
-| Example | Support IDE And Version| Description | Picture |
+| example | `[vscode][esp-idf-v5.4.0]` | description | picture |
 | ------  | ------  | ------ | ------ | 
-| [GFX](./examples/GFX) | `[Arduino IDE][esp32_v3.0.7]` |  |  |
-| [Lvgl_CIT](./examples/Lvgl_CIT) |`[Arduino IDE][esp32_v3.0.7]` | Product factory original testing |  |
-| [CHSC5816](./examples/CHSC5816) | `[Arduino IDE][esp32_v3.0.7]` |  |  |
-| [Rotary_Encoder](./examples/Rotary_Encoder) | `[Arduino IDE][esp32_v3.0.7]` |  |  |
+| [iic_scan](./main/examples/iic_scan) | <p align="center">![alt text][supported] |  |  |
+| [screen_touch_lvgl_9](./main/examples/screen_touch_lvgl_9) |<p align="center">![alt text][supported] | |  |
+| [touch](./main/examples/touch) | <p align="center">![alt text][supported] |  |  |
 
-| Firmware | Description | Picture |
-| ------  | ------  | ------ |
-| [Lvgl_CIT](./firmware/[T-Encoder-Pro_V1.0][Lvgl_CIT]_firmware_V1.0.0.bin) | Original |  |
+[supported]: https://img.shields.io/badge/-supported-green "example"
 
-### PlatformIO
-1. 安装[VisualStudioCode](https://code.visualstudio.com/Download)，根据你的系统类型选择安装。
+### ESP-IDF Visual Studio Code
+1. 安装 [Visual Studio Code](https://code.visualstudio.com/Download) ，根据你的系统类型选择安装。
 
-2. 打开VisualStudioCode软件侧边栏的“扩展”（或者使用<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>X</kbd>打开扩展），搜索“PlatformIO IDE”扩展并下载。
+2. 打开 VisualStudioCode 软件侧边栏的“扩展”（或者使用<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>X</kbd>打开扩展），搜索“ESP-IDF”扩展并下载。
 
-3. 在安装扩展的期间，你可以前往GitHub下载程序，你可以通过点击带绿色字样的“<> Code”下载主分支程序，也通过侧边栏下载“Releases”版本程序。
+3. 在安装扩展的期间，使用git命令克隆仓库
 
-4. 扩展安装完成后，打开侧边栏的资源管理器（或者使用<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>E</kbd>打开），点击“打开文件夹”，找到刚刚你下载的项目代码（整个文件夹），点击“添加”，此时项目文件就添加到你的工作区了。
+        git clone -b espidf-v5.4 --recursive https://github.com/Xinyuan-LilyGO/T-Encoder-Pro.git
 
-5. 打开项目文件中的“platformio.ini”（添加文件夹成功后PlatformIO会自动打开对应文件夹的“platformio.ini”）,在“[platformio]”目录下取消注释选择你需要烧录的示例程序（以“default_envs = xxx”为标头），然后点击左下角的“<kbd>[√](image/4.png)</kbd>”进行编译，如果编译无误，将单片机连接电脑，点击左下角“<kbd>[→](image/5.png)</kbd>”即可进行烧录。
+    克隆时候需要同时加上“--recursive”，如果克隆时候未加上那么之后使用的时候需要初始化一下子模块
 
-### Arduino
-1. 安装[Arduino](https://www.arduino.cc/en/software)，根据你的系统类型选择安装。
+        git submodule update --init --recursive
 
-2. 打开项目文件夹的“example”目录，选择示例项目文件夹，打开以“.ino”结尾的文件即可打开Arduino IDE项目工作区。
+4. 下载安装 [ESP-IDF v5.4.1](https://dl.espressif.cn/dl/esp-idf/?idf=4.4)，记录一下安装路径，打开之前安装好的“ESP-IDF”扩展打开“配置 ESP-IDF 扩展”，选择“USE EXISTING SETUP”菜单，选择“Search ESP-IDF in system”栏，正确配置之前记录的安装路径：
+   - **ESP-IDF directory (IDF_PATH):** `你的安装路径xxx\Espressif\frameworks\esp-idf-v5.4`  
+   - **ESP-IDF Tools directory (IDF_TOOLS_PATH):** `你的安装路径xxx\Espressif`  
+    点击右下角的“install”进行框架安装。
 
-3. 打开右上角“工具”菜单栏->选择“开发板”->“开发板管理器”，找到或者搜索“esp32”，下载作者名为“Espressif Systems”的开发板文件。接着返回“开发板”菜单栏，选择“ESP32 Arduino”开发板下的开发板类型，选择的开发板类型由“platformio.ini”文件中以[env]目录下的“board = xxx”标头为准，如果没有对应的开发板，则需要自己手动添加项目文件夹下“board”目录下的开发板。
+5. 点击 Visual Studio Code 底部菜单栏的 ESP-IDF 扩展菜单“SDK 配置编辑器”，在搜索栏里搜索“Select the example to build”字段，选择你所需要编译的项目，再在搜索栏里搜索“Select the camera type”字段，选择你的板子板载的摄像头类型，点击保存。
 
-4. 打开菜单栏“[文件](image/6.png)”->“[首选项](image/6.png)”，找到“[项目文件夹位置](image/7.png)”这一栏，将项目目录下的“libraries”文件夹里的所有库文件连带文件夹复制粘贴到这个目录下的“libraries”里边。
+6. 点击 Visual Studio Code 底部菜单栏的“设置乐鑫设备目标”，选择**ESP32S3**，点击底部菜单栏的“构建项目”，等待构建完成后点击底部菜单栏的“选择要使用的端口”，之后点击底部菜单栏的“烧录项目”进行烧录程序。
 
-5. 在 "工具 "菜单中选择正确的设置，如下表所示。
-
-| Setting                               | Value                                 |
-| :-------------------------------: | :-------------------------------: |
-| Board                                | ESP32S3 Dev Module|
-| Upload Speed                     | 921600                               |
-| USB Mode                           | Hardware CDC and JTAG     |
-| USB CDC On Boot                | Enabled                             |
-| USB Firmware MSC On Boot | Disabled                             |
-| USB DFU On Boot                | Disabled                             |
-| CPU Frequency                   | 240MHz (WiFi)                    |
-| Flash Mode                         | QIO 80MHz                         |
-| Flash Size                           | 16MB (128Mb)                     |
-| Core Debug Level                | None                                 |
-| Partition Scheme                | 16M Flash (3MB APP/9.9MB FATFS) |
-| PSRAM                                | OPI PSRAM                         |
-| Arduino Runs On                  | Core 1                               |
-| Events Run On                     | Core 1                               |
-
-6. 选择正确的端口。
-
-7. 点击右上角“<kbd>[√](image/8.png)</kbd>”进行编译，如果编译无误，将单片机连接电脑，点击右上角“<kbd>[→](image/9.png)</kbd>”即可进行烧录。
+<p align="center" width="100%">
+    <img src="image/1.jpg" alt="example">
+</p>
 
 ### firmware烧录
 1. 打开项目文件“tools”找到ESP32烧录工具，打开。

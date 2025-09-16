@@ -2,7 +2,7 @@
  * @Description: None
  * @Author: LILYGO_L
  * @Date: 2023-09-11 16:13:14
- * @LastEditTime: 2024-11-18 11:40:39
+ * @LastEditTime: 2025-09-16 10:43:00
  * @License: GPL 3.0
 -->
 <h1 align = "center">T-Encoder-Pro</h1>
@@ -94,59 +94,39 @@
 
 ### Examples Support
 
-| Example | Support IDE And Version| Description | Picture |
+| example | `[vscode][esp-idf-v5.4.0]` | description | picture |
 | ------  | ------  | ------ | ------ | 
-| [GFX](./examples/GFX) | `[Arduino IDE][esp32_v3.0.7]` |  |  |
-| [Lvgl_CIT](./examples/Lvgl_CIT) |`[Arduino IDE][esp32_v3.0.7]` | Product factory original testing |  |
-| [CHSC5816](./examples/CHSC5816) | `[Arduino IDE][esp32_v3.0.7]` |  |  |
-| [Rotary_Encoder](./examples/Rotary_Encoder) | `[Arduino IDE][esp32_v3.0.7]` |  |  |
+| [iic_scan](./main/examples/iic_scan) | <p align="center">![alt text][supported] |  |  |
+| [screen_touch_lvgl_9](./main/examples/screen_touch_lvgl_9) |<p align="center">![alt text][supported] | |  |
+| [touch](./main/examples/touch) | <p align="center">![alt text][supported] |  |  |
 
-| Firmware | Description | Picture |
-| ------  | ------  | ------ |
-| [Lvgl_CIT](./firmware/[T-Encoder-Pro_V1.0][Lvgl_CIT]_firmware_V1.0.0.bin) | Original |  |
+[supported]: https://img.shields.io/badge/-supported-green "example"
 
-### PlatformIO
-1. Install [VisualStudioCode](https://code.visualstudio.com/Download),choose installation based on your system type.
+### ESP-IDF Visual Studio Code  
+1. Install [Visual Studio Code](https://code.visualstudio.com/Download) by selecting the appropriate version for your operating system.  
 
-2. Open the "Extension" section of the Visual Studio Code software sidebar (Alternatively, use "<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>X</kbd>" to open the extension). Search for the "PlatformIO IDE" extension and download it.
+2. Open the "Extensions" sidebar in Visual Studio Code (or use <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>X</kbd> to open extensions), search for the "ESP-IDF" extension, and install it.  
 
-3. During the installation of the extension, you can go to GitHub to download the program. You can download the main branch by clicking on the "<> Code" with green text, or you can download the program versions from the "Releases" section in the sidebar.
+3. While the extension is installing, use the git command to clone the repository:  
 
-4. After the installation of the extension is completed, open the Explorer in the sidebar (Alternatively, use "<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>E</kbd>" go open it). Click on "Open Folder", locate the project code you just downloaded (the entire folder), and click "Add." At this point, the project files will be added to your workspace.
+        git clone -b espidf-v5.4 --recursive https://github.com/Xinyuan-LilyGO/T-Encoder-Pro.git
 
-5. Open the "platformio.ini" file in the project folder (PlatformIO will automatically open the "platformio.ini" file corresponding to the added folder). Under the "[platformio]" section, uncomment and select the example program you want to burn (it should start with "default_envs = xxx") Then click "<kbd>[√](image/4.png)</kbd>" in the bottom left corner to compile. If the compilation is correct, connect the microcontroller to the computer and click "<kbd>[→](image/5.png)</kbd>" in the bottom left corner to download the program.
+    Ensure you include the `--recursive` flag during cloning. If you forget to include it, you will need to initialize the submodules later by running:  
 
-### Arduino
-1. Install [Arduino](https://www.arduino.cc/en/software), choose installation based on your system type.
+        git submodule update --init --recursive  
 
-2. Open the "example" directory within the project folder, select the example project folder, and open the file ending with ".ino" to open the Arduino IDE project workspace.
+4. Download and install [ESP-IDF v5.4.1](https://dl.espressif.cn/dl/esp-idf/?idf=4.4). Take note of the installation path. Open the previously installed "ESP-IDF" extension and select "Configure ESP-IDF Extension." Choose the "USE EXISTING SETUP" menu, then select "Search ESP-IDF in system." Correctly configure the installation path you noted earlier:  
+   - **Enter ESP-IDF directory (IDF_PATH):** `Your installation path xxx\Espressif\frameworks\esp-idf-v5.4`  
+   - **Enter ESP-IDF Tools directory (IDF_TOOLS_PATH):** `Your installation path xxx\Espressif`  
+    Click the "Install" button at the bottom right to proceed with the framework installation.  
 
-3. Open the "Tools" menu at the top right -> Select "Board" -> "Board Manager." Find or search for "esp32" and download the board files from the author named "Espressif Systems." Then, go back to the "Board" menu and select the development board type under "ESP32 Arduino." The selected development board type should match the one specified in the "platformio.ini" file under the [env] section with the header "board = xxx." If there is no corresponding development board, you may need to manually add the development board from the "board" directory within your project folder.
+5. Click the "SDK Configuration Editor" in the ESP-IDF extension menu at the bottom of Visual Studio Code. In the search bar, look for the field "Select the example to build" and choose the project you want to compile. Then, search for "Select the camera type" and select the camera model integrated on your board. Save the settings.  
 
-4. Open menu bar "[File](image/6.png)" -> "[Preferences](image/6.png)", find "[Sketchbook location](image/7.png)" here, copy and paste all library files and folders from the "libraries" folder in the project directory into the "libraries" folder in this directory.
+6. Click "Set Espressif Device Target" in the bottom menu bar of Visual Studio Code and select **ESP32S3**. Next, click "Build Project" in the bottom menu bar and wait for the build to complete. Then, click "Select Port to Use," followed by "Flash Project" to upload the program.  
 
-5. Select the correct settings in the Tools menu, as shown in the table below.
-
-| Setting                               | Value                                 |
-| :-------------------------------: | :-------------------------------: |
-| Board                                | ESP32S3 Dev Module|
-| Upload Speed                     | 921600                               |
-| USB Mode                           | Hardware CDC and JTAG     |
-| USB CDC On Boot                | Enabled                             |
-| USB Firmware MSC On Boot | Disabled                             |
-| USB DFU On Boot                | Disabled                             |
-| CPU Frequency                   | 240MHz (WiFi)                    |
-| Flash Mode                         | QIO 80MHz                         |
-| Flash Size                           | 16MB (128Mb)                     |
-| Core Debug Level                | None                                 |
-| Partition Scheme                | 16M Flash (3MB APP/9.9MB FATFS) |
-| PSRAM                                | OPI PSRAM                         |
-| Arduino Runs On                  | Core 1                               |
-| Events Run On                     | Core 1                               |
-
-6. Select the correct port.
-
-7. Click "<kbd>[√](image/8.png)</kbd>" in the upper right corner to compile. If the compilation is correct, connect the microcontroller to the computer, click "<kbd>[→](image/9.png)</kbd>" in the upper right corner to download.
+<p align="center" width="100%">
+    <img src="image/1.jpg" alt="example">
+</p>
 
 ### Firmware download
 1. Open the project file "tools" and locate the ESP32 burning tool. Open it.

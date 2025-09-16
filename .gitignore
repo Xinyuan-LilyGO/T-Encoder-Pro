@@ -1,2 +1,10 @@
-.pio
+.devcontainer
 .vscode
+build
+sdkconfig
+sdkconfig.old
+dependencies.lock
+managed_components
+.clangd
+
+
