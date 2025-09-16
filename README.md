@@ -2,7 +2,7 @@
  * @Description: None
  * @Author: LILYGO_L
  * @Date: 2023-09-11 16:13:14
- * @LastEditTime: 2025-09-16 10:45:52
+ * @LastEditTime: 2025-09-16 11:58:12
  * @License: GPL 3.0
 -->
 <h1 align = "center">T-Encoder-Pro</h1>
@@ -95,6 +95,8 @@
 | [iic_scan](./main/examples/iic_scan) | <p align="center">![alt text][supported] |  |  |
 | [screen_touch_lvgl_9](./main/examples/screen_touch_lvgl_9) |<p align="center">![alt text][supported] | |  |
 | [touch](./main/examples/touch) | <p align="center">![alt text][supported] |  |  |
+| [buzzer](./main/examples/buzzer) |<p align="center">![alt text][supported] | |  |
+| [rotary_encoder](./main/examples/rotary_encoder) | <p align="center">![alt text][supported] |  |  |
 
 [supported]: https://img.shields.io/badge/-supported-green "example"
 

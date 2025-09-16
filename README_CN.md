@@ -2,7 +2,7 @@
  * @Description: None
  * @Author: LILYGO_L
  * @Date: 2023-09-11 16:13:14
- * @LastEditTime: 2025-09-16 10:46:02
+ * @LastEditTime: 2025-09-16 11:58:05
  * @License: GPL 3.0
 -->
 
@@ -96,6 +96,8 @@ T-Encoder-Pro是一款基于ESP32S3R8芯片的智能控制旋钮，配备AMOLED�
 | [iic_scan](./main/examples/iic_scan) | <p align="center">![alt text][supported] |  |  |
 | [screen_touch_lvgl_9](./main/examples/screen_touch_lvgl_9) |<p align="center">![alt text][supported] | |  |
 | [touch](./main/examples/touch) | <p align="center">![alt text][supported] |  |  |
+| [buzzer](./main/examples/buzzer) |<p align="center">![alt text][supported] | |  |
+| [rotary_encoder](./main/examples/rotary_encoder) | <p align="center">![alt text][supported] |  |  |
 
 [supported]: https://img.shields.io/badge/-supported-green "example"
 
