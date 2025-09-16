@@ -5,6 +5,10 @@ elseif(CONFIG_EXAMPLE_BUILD_TOUCH)
     set(project_path "examples/touch/")
 elseif(CONFIG_EXAMPLE_BUILD_SCREEN_TOUCH_LVGL_9)
     set(project_path "examples/screen_touch_lvgl_9/")
+elseif(CONFIG_EXAMPLE_BUILD_BUZZER)
+    set(project_path "examples/buzzer/")
+elseif(CONFIG_EXAMPLE_BUILD_ROTARY_ENCODER)
+    set(project_path "examples/rotary_encoder/")
 endif()
         
 idf_component_register(SRC_DIRS ${project_path} 

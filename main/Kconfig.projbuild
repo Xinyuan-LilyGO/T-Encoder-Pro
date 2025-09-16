@@ -29,6 +29,10 @@ menu "Example Configuration"
                 bool "touch"
             config EXAMPLE_BUILD_SCREEN_TOUCH_LVGL_9
                 bool "screen_touch_lvgl_9"
+            config EXAMPLE_BUILD_BUZZER
+                bool "buzzer"
+            config EXAMPLE_BUILD_ROTARY_ENCODER
+                bool "rotary_encoder"
     endchoice
 
 endmenu
