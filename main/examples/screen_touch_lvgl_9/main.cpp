@@ -2,7 +2,7 @@
  * @Description: ft3168
  * @Author: LILYGO_L
  * @Date: 2025-06-13 12:06:14
- * @LastEditTime: 2025-09-15 18:11:09
+ * @LastEditTime: 2025-09-17 16:12:34
  * @License: GPL 3.0
  */
 #include <stdio.h>
@@ -12,7 +12,7 @@
 #include "esp_log.h"
 #include "sdkconfig.h"
 #include "pin_config.h"
-#include "arduino_cpp_bus_driver_library.h"
+#include "cpp_bus_driver_library.h"
 #include "TouchDrvCHSC5816.hpp"
 #include "lvgl.h"
 #include "esp_timer.h"
@@ -151,8 +151,7 @@ void Touch_Init()
 {
     printf("Touch_Init\n");
 
-    Wire.setPins(IIC_SDA, IIC_SCL);
-    if (Touch->begin(Wire, CHSC5816_SLAVE_ADDRESS) == false)
+    if (Touch->begin(Wire, CHSC5816_SLAVE_ADDRESS, IIC_SDA, IIC_SCL) == false)
     {
         printf("chsc5816 init fail\n");
     }

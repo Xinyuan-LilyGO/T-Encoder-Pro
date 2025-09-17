@@ -2,7 +2,7 @@
  * @Description: None
  * @Author: LILYGO_L
  * @Date: 2025-09-15 10:58:26
- * @LastEditTime: 2025-09-15 17:53:35
+ * @LastEditTime: 2025-09-17 16:15:56
  * @License: GPL 3.0
  */
 #include <stdio.h>
@@ -64,8 +64,7 @@ extern "C" void app_main(void)
                                        interrupt_flag = true;
                                    });
 
-    Wire.setPins(IIC_SDA, IIC_SCL);
-    if (Touch->begin(Wire, CHSC5816_SLAVE_ADDRESS) == false)
+    if (Touch->begin(Wire, CHSC5816_SLAVE_ADDRESS, IIC_SDA, IIC_SCL) == false)
     {
         printf("chsc5816 init fail\n");
     }
