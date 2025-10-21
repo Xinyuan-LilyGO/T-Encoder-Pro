@@ -1,12 +1,22 @@
 /*
  * @Description: None
- * @version: None
- * @Author: None
- * @Date: 2023-06-05 13:01:59
- * @LastEditors: LILYGO_L
- * @LastEditTime: 2024-02-02 17:40:55
+ * @Author: LILYGO_L
+ * @Date: 2025-10-21 09:21:05
+ * @LastEditTime: 2025-10-21 15:45:43
+ * @License: GPL 3.0
  */
 #pragma once
+
+// #define DXQ120MYB2416A      // SH8601屏幕 CHSC5816触摸
+#define TFD12MASBCTB4_V0_07 // CO5300屏幕 CST816触摸
+
+#if defined DXQ120MYB2416A
+#elif defined TFD12MASBCTB4_V0_07
+// CST816
+#define CST816_ADDRESS 0x15
+#else
+#error "Unknown macro definition. Please select the correct macro definition."
+#endif
 
 // BUZZER_DATA
 #define BUZZER_DATA 17

@@ -40,22 +40,26 @@ void Arduino_SH8601::writeAddrWindow(int16_t x, int16_t y, uint16_t w, uint16_t 
 void Arduino_SH8601::setRotation(uint8_t r)
 {
     // Sh8601 does not support rotation
-    Arduino_TFT::setRotation(r);
     switch (_rotation)
     {
     case 0:
-        r = SH8601_MADCTL_COLOR_ORDER | SH8601_MADCTL_Y_AXIS_FLIP; // Flip left and right
+        Arduino_TFT::setRotation(0);
+        r = SH8601_MADCTL_COLOR_ORDER;
+        break;
     case 1:
-        r = SH8601_MADCTL_COLOR_ORDER; // Normal
+        Arduino_TFT::setRotation(0);
+        r = SH8601_MADCTL_COLOR_ORDER | SH8601_MADCTL_X_AXIS_FLIP;
         break;
     case 2:
-        r = SH8601_MADCTL_COLOR_ORDER | SH8601_MADCTL_Y_AXIS_FLIP; // Upside down
+        Arduino_TFT::setRotation(0);
+        r = SH8601_MADCTL_COLOR_ORDER | SH8601_MADCTL_Y_AXIS_FLIP;
         break;
     case 3:
-
+        Arduino_TFT::setRotation(0);
+        r = SH8601_MADCTL_COLOR_ORDER | SH8601_MADCTL_X_AXIS_FLIP | SH8601_MADCTL_Y_AXIS_FLIP; // flip horizontal and flip vertical
         break;
-    default:
 
+    default:
         break;
     }
     _bus->beginWrite();
@@ -70,13 +74,19 @@ void Arduino_SH8601::invertDisplay(bool i)
 
 void Arduino_SH8601::displayOn(void)
 {
-    _bus->writeCommand(SH8601_C_SLPOUT);
+    _bus->sendCommand(SH8601_C_DISPON);
+    delay(SH8601_SLPIN_DELAY);
+    _bus->sendCommand(SH8601_C_SLPOUT);
+    // _bus->writeC8D8(SH8601_W_DEEPSTMODE, 0x00);
     delay(SH8601_SLPOUT_DELAY);
 }
 
 void Arduino_SH8601::displayOff(void)
 {
+    _bus->sendCommand(SH8601_C_DISPOFF);
+    delay(SH8601_SLPIN_DELAY);
     _bus->sendCommand(SH8601_C_SLPIN);
+    // _bus->writeC8D8(SH8601_W_DEEPSTMODE, 0x01);
     delay(SH8601_SLPIN_DELAY);
 }
 

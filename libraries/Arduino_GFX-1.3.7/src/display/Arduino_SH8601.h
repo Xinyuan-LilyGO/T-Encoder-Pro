@@ -103,8 +103,8 @@
 #define SH8601_R_RDID3 0xDC // Read ID3
 
 // Flip
-#define SH8601_MADCTL_X_AXIS_FLIP 0x40 // X-axis Flip
-#define SH8601_MADCTL_Y_AXIS_FLIP 0xC0 // Y-axis Flip
+#define SH8601_MADCTL_X_AXIS_FLIP 0x02 // Flip Horizontal
+#define SH8601_MADCTL_Y_AXIS_FLIP 0x05 // Flip Vertical
 
 // Color Order
 #define SH8601_MADCTL_RGB 0x00                      // Red-Green-Blue pixel order

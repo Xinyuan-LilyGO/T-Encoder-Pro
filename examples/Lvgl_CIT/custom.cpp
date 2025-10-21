@@ -1,12 +1,11 @@
 /*
  * @Description: None
- * @version: V1.0.0
  * @Author: LILYGO_L
- * @Date: 2023-10-05 11:31:11
- * @LastEditors: LILYGO_L
- * @LastEditTime: 2024-01-31 13:42:36
+ * @Date: 2024-11-07 00:31:07
+ * @LastEditTime: 2025-10-21 16:05:44
  * @License: GPL 3.0
  */
+
 #include <Arduino.h>
 #include <stdio.h>
 #include "lvgl.h"
@@ -264,7 +263,7 @@ void Window_Rotary_Encoder_WS2812B_Test_Loop(void)
 
         gfx->setCursor(50, CIT_UI.LCD_Width / 2);
         gfx->setTextColor(ORANGE);
-        gfx->setTextSize(3);
+        gfx->setTextSize(2);
         gfx->printf("Rotate the knob");
 
         CycleTime = millis() + 3000; // 3000ms
@@ -296,7 +295,7 @@ void Window_Rotary_Encoder_WS2812B_Test_Loop(void)
 
             gfx->setCursor(60, 100);
             gfx->setTextColor(PINK);
-            gfx->setTextSize(3);
+            gfx->setTextSize(2);
             gfx->printf("[KNOB Trigger]");
 
             gfx->setCursor(60, 130);
@@ -352,7 +351,7 @@ void Window_Rotary_Encoder_WS2812B_Test_Loop(void)
 
             gfx->setCursor(60, 100);
             gfx->setTextColor(PURPLE);
-            gfx->setTextSize(3);
+            gfx->setTextSize(2);
             gfx->printf("[KNOB Trigger]");
 
             gfx->setCursor(60, 130);
@@ -431,7 +430,7 @@ void Window_OLED_Edge_Detection_Test_Loop(void)
 
         gfx->setCursor(100, CIT_UI.LCD_Width / 2);
         gfx->setTextColor(ORANGE);
-        gfx->setTextSize(3);
+        gfx->setTextSize(2);
         gfx->printf("R=388px");
         gfx->drawRect(1, 1, 390 - 2, 390 - 2, RED);
         delay(3000);
