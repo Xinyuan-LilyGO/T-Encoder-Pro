@@ -2,7 +2,7 @@
  * @Description: This is a user testing program CIT written for T-Encoder-Pro.
  * @Author: LILYGO_L
  * @Date: 2025-09-16 13:31:12
- * @LastEditTime: 2025-10-21 15:49:10
+ * @LastEditTime: 2025-12-06 12:07:10
  * @License: GPL 3.0
  */
 #include "custom.h"
@@ -244,9 +244,9 @@ void setup()
     setup_ui(&guider_ui);
     events_init(&guider_ui);
 
-    // ledcWrite(1, 127);
-    // delay(1000);
-    // ledcWrite(1, 0);
+    ledcWrite(1, 127);
+    delay(1000);
+    ledcWrite(1, 0);
 }
 
 void loop()
