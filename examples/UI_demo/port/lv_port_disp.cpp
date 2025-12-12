@@ -13,6 +13,7 @@
 #include <stdbool.h>
 #include  "Arduino.h"
 #include "Arduino_GFX_Library.h"
+#include "Arduino_DriveBus_Library.h"
 #include "pin_config.h"
 /*********************
  *      DEFINES
@@ -37,9 +38,18 @@ Arduino_DataBus *bus = new Arduino_ESP32QSPI(
     LCD_CS /* CS */, LCD_SCLK /* SCK */, LCD_SDIO0 /* SDIO0 */,
     LCD_SDIO1 /* SDIO1 */, LCD_SDIO2 /* SDIO2 */, LCD_SDIO3 /* SDIO3 */);
 
+#if defined DXQ120MYB2416A
 Arduino_GFX *gfx = new Arduino_SH8601(bus, LCD_RST /* RST */, 0 /* rotation */,
                                       false /* IPS */, LCD_WIDTH, LCD_HEIGHT);
 
+#elif defined TFD12MASBCTB4_V0_07
+Arduino_GFX *gfx = new Arduino_CO5300(bus, LCD_RST /* RST */,
+                                      0 /* rotation */, false /* IPS */, LCD_WIDTH, LCD_HEIGHT,
+                                      0 /* col offset 1 */, 0 /* row offset 1 */, 0 /* col_offset2 */, 0 /* row_offset2 */);
+
+#else
+#error "Unknown macro definition. Please select the correct macro definition."
+#endif
 /**********************
  *  STATIC PROTOTYPES
  **********************/
@@ -155,7 +165,7 @@ static void disp_init(void)
     digitalWrite(LCD_VCI_EN, HIGH);
 
     // Init Display
-    if (!gfx->begin())
+    if (!gfx->begin(40000000))
     {
         Serial.println("gfx->begin() failed!");
     }

@@ -14,6 +14,8 @@
 #include "pin_config.h"
 #include  "Arduino.h"
 #include "TouchDrvCHSC5816.hpp"
+#include "Arduino_DriveBus_Library.h"
+#include "pin_config.h"
 #include "ui.h"
 /*********************
  *      DEFINES
@@ -46,13 +48,33 @@ lv_indev_t * indev_encoder;
 
 static int32_t encoder_diff;
 static lv_indev_state_t encoder_state;
+int touch_x = 0;
+int touch_y = 0;
+int encoder_direction = 0;
+
+#if defined DXQ120MYB2416A
 
 TouchDrvCHSC5816 touch;
 TouchDrvInterface *pTouch;
 
-int touch_x = 0;
-int touch_y = 0;
-int encoder_direction = 0;
+#elif defined TFD12MASBCTB4_V0_07
+
+std::shared_ptr<Arduino_IIC_DriveBus> IIC_Bus =
+    std::make_shared<Arduino_HWIIC>(IIC_SDA, IIC_SCL, &Wire);
+
+void Arduino_IIC_Touch_Interrupt(void);
+
+std::unique_ptr<Arduino_IIC> CST816D(new Arduino_CST816x(IIC_Bus, CST816D_DEVICE_ADDRESS,
+                                                         TOUCH_RST, TOUCH_INT, Arduino_IIC_Touch_Interrupt));
+
+void Arduino_IIC_Touch_Interrupt(void)
+{
+    CST816D->IIC_Interrupt_Flag = true;
+}
+#else
+#error "Unknown macro definition. Please select the correct macro definition."
+#endif
+
 
 /**********************
  *      MACROS
@@ -162,6 +184,7 @@ void in_indev_touchpad_line_en(bool en){
 /*Initialize your touchpad*/
 static void touchpad_init(void)
 {
+#if defined DXQ120MYB2416A
     /*Your code comes here*/
     TouchDrvCHSC5816 *pd1 = static_cast<TouchDrvCHSC5816 *>(pTouch);
 
@@ -175,6 +198,22 @@ static void touchpad_init(void)
         }
     }
     Serial.println("Init CHSC5816 Touch device success!");
+#elif defined TFD12MASBCTB4_V0_07
+    if (CST816D->begin() == false)
+    {
+        Serial.println("CST816D initialization fail");
+    }
+    else
+    {
+        Serial.println("CST816D initialization successfully");
+
+        // 中断模式为检测到触摸时，发出低脉冲
+        CST816D->IIC_Write_Device_State(CST816D->Arduino_IIC_Touch::Device::TOUCH_DEVICE_INTERRUPT_MODE,
+                                        CST816D->Arduino_IIC_Touch::Device_Mode::TOUCH_DEVICE_INTERRUPT_PERIODIC);
+    }
+#else
+#error "Unknown macro definition. Please select the correct macro definition."
+#endif
 
     static lv_style_t style_line;
     lv_style_init(&style_line);
@@ -195,6 +234,7 @@ static void touchpad_init(void)
 /*Will be called by the library to read the touchpad*/
 static void touchpad_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
 {
+#if defined DXQ120MYB2416A
     if(touchpad_enabled){
         int16_t x[2], y[2];
         uint8_t touchpad = touch.getPoint(x, y);
@@ -220,6 +260,39 @@ static void touchpad_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
     }
     lv_msg_send(MSG_INDEV_TOUCH_X, &touch_x);
     lv_msg_send(MSG_INDEV_TOUCH_Y, &touch_y);
+
+#elif defined TFD12MASBCTB4_V0_07
+    if(touchpad_enabled){
+        if (CST816D->IIC_Read_Device_Value(CST816D->Arduino_IIC_Touch::Value_Information::TOUCH_FINGER_NUMBER) > 0)
+        {
+
+            data->state = LV_INDEV_STATE_PR;
+
+            /*Set the coordinates*/
+            data->point.x = (uint32_t)CST816D->IIC_Read_Device_Value(CST816D->Arduino_IIC_Touch::Value_Information::TOUCH_COORDINATE_X);
+            data->point.y = (uint32_t)CST816D->IIC_Read_Device_Value(CST816D->Arduino_IIC_Touch::Value_Information::TOUCH_COORDINATE_Y);
+
+            touch_x = data->point.x;
+            touch_y = data->point.y;
+            // Serial.print("Data x ");
+            // Serial.printf("%d\n", x[0]);
+
+            // Serial.print("Data y ");
+            // Serial.printf("%d\n", y[0]);
+        }
+        else
+        {
+            data->state = LV_INDEV_STATE_REL;
+        }
+        if(touch_line_en)
+            touch_line(data);
+    }
+    lv_msg_send(MSG_INDEV_TOUCH_X, &touch_x);
+    lv_msg_send(MSG_INDEV_TOUCH_Y, &touch_y);
+#else
+#error "Unknown macro definition. Please select the correct macro definition."
+#endif
+    
 }
 
 /*Return true is the touchpad is pressed*/
