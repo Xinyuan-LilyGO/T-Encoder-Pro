@@ -12,7 +12,7 @@
  * @Author: LILYGO_L
  * @Date: 2023-11-16 15:49:20
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2025-08-25 14:32:14
+ * @LastEditTime: 2026-03-26 14:52:24
  * @License: GPL 3.0
  */
 #pragma once
@@ -20,10 +20,8 @@
 #include "Arduino_DriveBus.h"
 
 #include "./hardware/Arduino_HWIIC.h"
-#include "./hardware/Arduino_HWIIS.h"
 
 #include "Arduino_IIC.h"
-#include "Arduino_IIS.h"
 
 #include "./power_chip/Arduino_ETA4662.h"
 #include "./power_chip/Arduino_SY6970.h"
@@ -32,9 +30,6 @@
 #include "./touch_chip/Arduino_CST816x.h"
 #include "./touch_chip/Arduino_CST2xxSE.h"
 #include "./touch_chip/Arduino_FT3x68.h"
-
-#include "./iis_chip/Arduino_MEMS.h"
-#include "./iis_chip/Arduino_Amplifier.h"
 
 #include "./imu_chip/Arduino_LSM6DSL.h"
 
