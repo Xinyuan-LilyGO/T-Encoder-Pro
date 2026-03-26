@@ -2,7 +2,7 @@
  * @Description: None
  * @Author: LILYGO_L
  * @Date: 2023-09-11 16:13:14
- * @LastEditTime: 2024-11-18 11:40:39
+ * @LastEditTime: 2026-03-26 14:46:40
  * @License: GPL 3.0
 -->
 <h1 align = "center">T-Encoder-Pro</h1>
@@ -103,7 +103,8 @@
 
 | Firmware | Description | Picture |
 | ------  | ------  | ------ |
-| [Lvgl_CIT](./firmware/[T-Encoder-Pro_V1.0][Lvgl_CIT]_firmware_V1.0.0.bin) | Original |  |
+| [Lvgl_CIT](./firmware/[T-Encoder-Pro_V1.0][Lvgl_CIT]_firmware_V1.0.0.bin) | factory original testing screenDXQ120MYB2416A |  |
+| [Lvgl_CIT](./firmware/(添加开机蜂鸣器)[T-Encoder-Pro_V1.0][Lvgl_CIT][Screen_TFD12MASBCTB4_V0_07]_firmware_202512061209.bin) | factory original testing screen TFD12MASBCTB4_V0_07  |  |
 
 ### PlatformIO
 1. Install [VisualStudioCode](https://code.visualstudio.com/Download),choose installation based on your system type.

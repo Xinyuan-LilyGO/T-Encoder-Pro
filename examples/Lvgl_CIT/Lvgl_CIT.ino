@@ -1,9 +1,8 @@
 /*
- * @Description(EN):
- *      This is a user testing program CIT written for T-Encoder-Pro.
+ * @Description: This is a user testing program CIT written for T-Encoder-Pro.
  * @Author: LILYGO_L
- * @Date: 2023-09-22 11:59:37
- * @LastEditTime: 2024-11-11 14:09:45
+ * @Date: 2025-09-16 13:31:12
+ * @LastEditTime: 2026-03-26 14:38:58
  * @License: GPL 3.0
  */
 #include "custom.h"
@@ -12,11 +11,11 @@
 #include "events_init.h"
 #include "TouchDrvCHSC5816.hpp"
 #include "material_16bit.h"
+#include "Arduino_DriveBus_Library.h"
 
 static size_t Window_CycleTime1 = 0;
 
 static lv_disp_draw_buf_t draw_buf;
-static lv_color_t *disp_draw_buf;
 static lv_disp_drv_t disp_drv;
 
 // DXQ120MYB2416A
@@ -24,30 +23,72 @@ Arduino_DataBus *bus = new Arduino_ESP32QSPI(
     SCREEN_CS /* CS */, SCREEN_SCLK /* SCK */, SCREEN_SDIO0 /* SDIO0 */,
     SCREEN_SDIO1 /* SDIO1 */, SCREEN_SDIO2 /* SDIO2 */, SCREEN_SDIO3 /* SDIO3 */);
 
-Arduino_GFX *gfx = new Arduino_SH8601(bus, SCREEN_RST /* RST */, 0 /* rotation */,
-                                      false /* IPS */, SCREEN_WIDTH, SCREEN_HEIGHT);
-
+#if defined DXQ120MYB2416A
 TouchDrvCHSC5816 touch;
 TouchDrvInterface *pTouch;
+
+Arduino_GFX *gfx = new Arduino_SH8601(bus, SCREEN_RST /* RST */, 0 /* rotation */,
+                                      false /* IPS */, SCREEN_WIDTH, SCREEN_HEIGHT);
+#elif defined TFD12MASBCTB4_V0_07
+
+std::shared_ptr<Arduino_IIC_DriveBus> IIC_Bus =
+    std::make_shared<Arduino_HWIIC>(IIC_SDA, IIC_SCL, &Wire);
+
+void Arduino_IIC_Touch_Interrupt(void);
+
+std::unique_ptr<Arduino_IIC> CST816D(new Arduino_CST816x(IIC_Bus, CST816D_DEVICE_ADDRESS,
+                                                         TOUCH_RST, TOUCH_INT, Arduino_IIC_Touch_Interrupt));
+
+void Arduino_IIC_Touch_Interrupt(void)
+{
+    CST816D->IIC_Interrupt_Flag = true;
+}
+
+Arduino_GFX *gfx = new Arduino_CO5300(bus, SCREEN_RST /* RST */,
+                                      0 /* rotation */, false /* IPS */, SCREEN_WIDTH, SCREEN_HEIGHT,
+                                      0 /* col offset 1 */, 0 /* row offset 1 */, 0 /* col_offset2 */, 0 /* row_offset2 */);
+#else
+#error "Unknown macro definition. Please select the correct macro definition."
+#endif
 
 lv_ui guider_ui;
 Lvgl_CIT_UI CIT_UI;
 
-void CHSC5816_Initialization(void)
+void Touch_Initialization(void)
 {
+#if defined DXQ120MYB2416A
     TouchDrvCHSC5816 *pd1 = static_cast<TouchDrvCHSC5816 *>(pTouch);
 
     touch.setPins(TOUCH_RST, TOUCH_INT);
     if (!touch.begin(Wire, CHSC5816_SLAVE_ADDRESS, IIC_SDA, IIC_SCL))
     {
         Serial.println("Failed to find CHSC5816 - check your wiring!");
-        while (1)
-        {
-            delay(1000);
-        }
+        // while (1)
+        // {
+        //     delay(1000);
+        // }
+    }
+    else
+    {
+        Serial.println("Init CHSC5816 Touch device success!");
+    }
+#elif defined TFD12MASBCTB4_V0_07
+    if (CST816D->begin() == false)
+    {
+        Serial.println("CST816D initialization fail");
+    }
+    else
+    {
+        Serial.println("CST816D initialization successfully");
+
+        // 中断模式为检测到触摸时，发出低脉冲
+        CST816D->IIC_Write_Device_State(CST816D->Arduino_IIC_Touch::Device::TOUCH_DEVICE_INTERRUPT_MODE,
+                                        CST816D->Arduino_IIC_Touch::Device_Mode::TOUCH_DEVICE_INTERRUPT_PERIODIC);
     }
 
-    Serial.println("Init CHSC5816 Touch device success!");
+#else
+#error "Unknown macro definition. Please select the correct macro definition."
+#endif
 }
 
 /* Display flushing */
@@ -68,6 +109,8 @@ void my_disp_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color
 /*Read the touchpad*/
 void my_touchpad_read(lv_indev_drv_t *indev_drv, lv_indev_data_t *data)
 {
+
+#if defined DXQ120MYB2416A
     int16_t Touch_x[2], Touch_y[2];
     uint8_t touchpad = touch.getPoint(Touch_x, Touch_y);
 
@@ -89,6 +132,45 @@ void my_touchpad_read(lv_indev_drv_t *indev_drv, lv_indev_data_t *data)
     {
         data->state = LV_INDEV_STATE_REL;
     }
+#elif defined TFD12MASBCTB4_V0_07
+
+    if (CST816D->IIC_Read_Device_Value(CST816D->Arduino_IIC_Touch::Value_Information::TOUCH_FINGER_NUMBER) > 0)
+    {
+
+        data->state = LV_INDEV_STATE_PR;
+
+        /*Set the coordinates*/
+        data->point.x = (uint32_t)CST816D->IIC_Read_Device_Value(CST816D->Arduino_IIC_Touch::Value_Information::TOUCH_COORDINATE_X);
+        data->point.y = (uint32_t)CST816D->IIC_Read_Device_Value(CST816D->Arduino_IIC_Touch::Value_Information::TOUCH_COORDINATE_Y);
+
+        // Serial.print("Data x ");
+        // Serial.printf("%d\n", x[0]);
+
+        // Serial.print("Data y ");
+        // Serial.printf("%d\n", y[0]);
+    }
+    else
+    {
+        data->state = LV_INDEV_STATE_REL;
+    }
+#else
+#error "Unknown macro definition. Please select the correct macro definition."
+#endif
+}
+
+void my_rounder_cb(lv_disp_drv_t *disp_drv, lv_area_t *area)
+{
+    if (area->x1 % 2 != 0)
+        area->x1 += 1;
+    if (area->y1 % 2 != 0)
+        area->y1 += 1;
+
+    uint32_t w = (area->x2 - area->x1 + 1);
+    uint32_t h = (area->y2 - area->y1 + 1);
+    if (w % 2 != 0)
+        area->x2 -= 1;
+    if (h % 2 != 0)
+        area->y2 -= 1;
 }
 
 void lvgl_initialization(void)
@@ -98,15 +180,15 @@ void lvgl_initialization(void)
     CIT_UI.LCD_Width = gfx->width();
     CIT_UI.LCD_Height = gfx->height();
 
-    disp_draw_buf = (lv_color_t *)heap_caps_malloc(sizeof(lv_color_t) * CIT_UI.LCD_Width * 40, MALLOC_CAP_INTERNAL | MALLOC_CAP_8BIT);
+    lv_color_t *buf_1 = (lv_color_t *)heap_caps_malloc(CIT_UI.LCD_Width * CIT_UI.LCD_Height * sizeof(lv_color_t), MALLOC_CAP_SPIRAM | MALLOC_CAP_8BIT);
 
-    while (!disp_draw_buf)
+    while (!buf_1)
     {
-        Serial.println("LVGL disp_draw_buf allocate failed!");
+        Serial.println("LVGL buf_1 allocate failed!");
         delay(1000);
     }
 
-    lv_disp_draw_buf_init(&draw_buf, disp_draw_buf, NULL, CIT_UI.LCD_Width * 40);
+    lv_disp_draw_buf_init(&draw_buf, buf_1, NULL, CIT_UI.LCD_Width * CIT_UI.LCD_Height * sizeof(lv_color_t));
 
     /* Initialize the display */
     lv_disp_drv_init(&disp_drv);
@@ -114,6 +196,7 @@ void lvgl_initialization(void)
     disp_drv.hor_res = CIT_UI.LCD_Width;
     disp_drv.ver_res = CIT_UI.LCD_Height;
     disp_drv.flush_cb = my_disp_flush;
+    disp_drv.rounder_cb = my_rounder_cb;
     disp_drv.draw_buf = &draw_buf;
     lv_disp_drv_register(&disp_drv);
 
@@ -140,7 +223,7 @@ void setup()
     pinMode(SCREEN_EN, OUTPUT);
     digitalWrite(SCREEN_EN, HIGH);
 
-    CHSC5816_Initialization();
+    Touch_Initialization();
 
     gfx->begin(40000000);
     gfx->fillScreen(BLACK);
@@ -172,7 +255,7 @@ void loop()
 
     switch (CIT_UI.Window_Current_State)
     {
-    case CIT_UI.Window_Current_State::Window_OLED_Brightness_Test: // LCD_Backlight_Test
+    case CIT_UI.Window_Current_State::Window_OLED_Brightness_Test: // SCREEN_Backlight_Test
         if (CIT_UI.Window_Initialization_Flag == false)            // 初始化
         {
             CIT_UI.Window_Initialization_Flag = true;

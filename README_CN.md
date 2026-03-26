@@ -2,7 +2,7 @@
  * @Description: None
  * @Author: LILYGO_L
  * @Date: 2023-09-11 16:13:14
- * @LastEditTime: 2024-11-18 11:40:23
+ * @LastEditTime: 2026-03-26 14:47:24
  * @License: GPL 3.0
 -->
 
@@ -98,13 +98,14 @@ T-Encoder-Pro是一款基于ESP32S3R8芯片的智能控制旋钮，配备AMOLED�
 | Example | Support IDE And Version| Description | Picture |
 | ------  | ------  | ------ | ------ | 
 | [GFX](./examples/GFX) | `[Arduino IDE][esp32_v3.0.7]` |  |  |
-| [Lvgl_CIT](./examples/Lvgl_CIT) |`[Arduino IDE][esp32_v3.0.7]` | Product factory original testing |  |
+| [Lvgl_CIT](./examples/Lvgl_CIT) |`[Arduino IDE][esp32_v3.0.7]` | 出厂测试示例 |  |
 | [CHSC5816](./examples/CHSC5816) | `[Arduino IDE][esp32_v3.0.7]` |  |  |
 | [Rotary_Encoder](./examples/Rotary_Encoder) | `[Arduino IDE][esp32_v3.0.7]` |  |  |
 
 | Firmware | Description | Picture |
 | ------  | ------  | ------ |
-| [Lvgl_CIT](./firmware/[T-Encoder-Pro_V1.0][Lvgl_CIT]_firmware_V1.0.0.bin) | Original |  |
+| [Lvgl_CIT](./firmware/[T-Encoder-Pro_V1.0][Lvgl_CIT]_firmware_V1.0.0.bin) | 出厂示例 屏幕DXQ120MYB2416A |  |
+| [Lvgl_CIT](./firmware/(添加开机蜂鸣器)[T-Encoder-Pro_V1.0][Lvgl_CIT][Screen_TFD12MASBCTB4_V0_07]_firmware_202512061209.bin) | 出厂示例 屏幕TFD12MASBCTB4_V0_07  |  |
 
 ### PlatformIO
 1. 安装[VisualStudioCode](https://code.visualstudio.com/Download)，根据你的系统类型选择安装。

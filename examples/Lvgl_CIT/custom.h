@@ -2,7 +2,7 @@
  * @Description: None
  * @Author: LILYGO_L
  * @Date: 2023-10-06 10:54:55
- * @LastEditTime: 2024-11-11 14:09:08
+ * @LastEditTime: 2026-03-26 14:37:55
  * @License: GPL 3.0
  */
 #pragma once
@@ -52,7 +52,6 @@ public:
     bool Breathing_Light_State = false;
     int32_t Breathing_Light_Brightness = -1;
 
-    // LCD
     uint32_t LCD_Width = 0;
     uint32_t LCD_Height = 0;
 };
