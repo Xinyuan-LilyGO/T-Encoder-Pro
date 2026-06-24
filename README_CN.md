@@ -2,7 +2,7 @@
  * @Description: None
  * @Author: LILYGO_L
  * @Date: 2023-09-11 16:13:14
- * @LastEditTime: 2026-03-26 14:47:24
+ * @LastEditTime: 2026-06-24 11:31:00
  * @License: GPL 3.0
 -->
 
@@ -72,24 +72,31 @@ T-Encoder-Pro是一款基于ESP32S3R8芯片的智能控制旋钮，配备AMOLED�
 * FLASH：16M
 * 其他说明：更多资料请访问[乐鑫官方ESP32-S3数据手册](https://www.espressif.com.cn/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)
 
-### 2. 屏幕
+### 2. 屏幕和触摸
 
-* 尺寸：2.04英寸圆屏
-* 屏幕类型：AMOLED
-* 驱动芯片：SH8601A-W14-T06
-* 兼容库：Arduino_GFX
-* 总线通信协议：QSPI
+> #### 型号：DXQ120MYB2416A
+> * 尺寸：2.04英寸圆屏
+> * 屏幕类型：AMOLED
+> * 屏幕驱动芯片：SH8601
+> * 触摸驱动芯片：CHSC5816
+> * 依赖库：Arduino_GFX
+> * 总线通信协议：QSPI、I2C
 
-### 3. 触摸
+> #### 型号：TFD12MASBCTB4_V0_07
+> * 屏幕类型：AMOLED
+> * 屏幕驱动芯片：CO5300
+> * 触摸驱动芯片：CST816
+> * 依赖库：Arduino_GFX
+> * 总线通信协议：QSPI、I2C
 
-* 芯片：CHSC5816
-* 总线通信协议：IIC
+> [!NOTE]
+> TFD12MASBCTB4_V0_07为最新版本屏幕
 
-### 4. 旋转编码器
+### 3. 旋转编码器
 
 * 特性：支持左右旋转
 
-### 5. 蜂鸣器
+### 4. 蜂鸣器
 
 ## 快速开始
 

@@ -2,7 +2,7 @@
  * @Description: None
  * @Author: LILYGO_L
  * @Date: 2023-09-11 16:13:14
- * @LastEditTime: 2026-03-26 14:46:40
+ * @LastEditTime: 2026-06-24 11:30:23
  * @License: GPL 3.0
 -->
 <h1 align = "center">T-Encoder-Pro</h1>
@@ -71,24 +71,31 @@
 * FLASH: 16M
 * For more details, please visit [Espressif ESP32-S3 Datashee](https://www.espressif.com.cn/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)
 
-### 2. Screen
+### 2. Screen and Touch
 
-* Size: 1.2-inch round screen
-* Screen Type: AMOLED
-* Driver Chip: SH8601A-W14-T06
-* Compatibility Library: Arduino_GFX
-* Bus Communication Protocol: QSPI
+> **Model: DXQ120MYB2416A**
+> * Size: 2.04-inch round screen
+> * Screen type: AMOLED
+> * Display driver IC: SH8601
+> * Touch driver IC: CHSC5816
+> * Dependency library: Arduino_GFX
+> * Bus communication protocols: QSPI, I2C
 
-### 3. Touch
+> **Model: TFD12MASBCTB4_V0_07**
+> * Screen type: AMOLED
+> * Display driver IC: CO5300
+> * Touch driver IC: CST816
+> * Dependency library: Arduino_GFX
+> * Bus communication protocols: QSPI, I2C
 
-* Chip: CHSC5816
-* Bus Communication Protocol: IIC
+> [!NOTE]
+> TFD12MASBCTB4_V0_07 is the latest version of the screen.
 
-### 4. Rotary Encoder
+### 3. Rotary Encoder
 
 * Characteristic: Supports left and right rotation
 
-### 5. Buzzer
+### 4. Buzzer
 
 ## QuickStart
 
